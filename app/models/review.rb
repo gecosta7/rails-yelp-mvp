@@ -1,9 +1,13 @@
-class Restaurant < ApplicationRecord
-has_many :reviews, dependent: :destroy
-validates :name, :address, presence: true
-validates :category, inclusion: { in: %w(chinese italian japanese french belgian)}
+class Review < ApplicationRecord
+  belongs_to :restaurant
+  validates :restaurant, presence: true
+  validates :content, presence: true
+  validates :rating, numericality: { greater_than_or_equal_to: 0, less_than: 6 }
 end
 
+# class Player < ApplicationRecord
+  # validates :points, numericality: true
+  # validates :games_played, numericality: { only_integer: true }
 
 # Validation
 # A restaurant must have at least a name and an address.
